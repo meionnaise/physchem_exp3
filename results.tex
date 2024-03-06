@@ -1,0 +1,83 @@
+\documentclass[main.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+
+Since $1/16$ of the iron supplement was used in the digestion,
+\begin{equation}
+    m_{\text{Fe in tablet}} = \frac{m_{1/16 \text{ tablet}}}{m_{\text{tablet}}}m_{\text{sample}}
+    \label{eq:mass}
+\end{equation}
+
+The analysis was conducted on 50ml solutions that contained 2ml of a digested tablet sample that was dissolved in 100ml of water. Thus,
+\begin{equation}
+    C_{\text{sample}} = \frac{50 C_{\text{digested}}}{2}
+    = 25C_{\text{digested}}
+    \label{eq:test_digest}
+\end{equation}
+
+\begin{equation}
+    m_{\text{sample}} = \frac{100\text{ ml}}{2\text{ ml}}  \times C_{\text{sample}} = 50 \times 0.002 \times 25 \times C_{\text{digested}}
+    \label{eq:sample}
+\end{equation}
+
+
+
+Since standard linear calibration curve is in the form:
+\begin{equation*}
+    A = \frac{dy}{dx}C_{\text{digested}} + y_0
+    \label{eq:cal_nosub}
+\end{equation*}
+
+Rearranging:
+\begin{equation}
+    C_{\text{digested}} = \frac{(A-y_0)}{\frac{dy}{dx}}
+    \label{eq:conc_final_gen_eq}
+\end{equation}
+Substituting (\ref{eq:mass}), (\ref{eq:sample}), and (\ref{eq:test_digest}) to (\ref{eq:conc_final_gen_eq})
+\begin{equation}
+    m_{\text{Fe in tablet}} = 2.5 \times \frac{m_{1/16 \text{ tablet}}}{m_{\text{tablet}}} \times\frac{(A-y_0)}{\frac{dy}{dx}}
+    \label{eq:mega}
+\end{equation}
+
+
+
+\subsection*{Sample}
+\input{mass}
+\input{sample_abs}
+
+\subsection*{Calibration Curve}
+As shown in Figure \ref{fig:colours}, visually, the quantity of orange light reflected - which is proportional to concentration - of the digested tablet samples are between 0.8 and 0.2ppm.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{standards_colours.png}
+    \caption{Standard solutions next to digested tablet samples.}
+    \label{fig:colours}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{standard_curve.png}
+    \caption{Standard calibration curve for absorbance at $\lambda=508$ nm}
+    \label{fig:cal_curve}
+\end{figure}
+See Table \ref{tab:conc_table} in appendix.
+
+\input{uncertainty}
+
+Thus, the equation for the calibration curve is:
+\begin{equation*}
+    \mathcolorbox{Lavender}{A = 0.21066718C_{\text{digested}} -0.0077607}
+\end{equation*}
+
+\subsection*{Calculation of mass of iron in a supplement tablet}
+By substituting values from Tables \ref{tab:mass} \ref{tab:uncertainty}, and \ref{tab:sample_abs} to Equation \ref{eq:mega},
+
+\input{all_mass}
+
+Since the ranges overlap, the results are reproducible.
+
+
+
+
+\end{document}
