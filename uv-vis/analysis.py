@@ -8,10 +8,17 @@ part2_ii = np.genfromtxt('part2_ii.csv', delimiter=',')
 ####################################################
 #PART 2
 ####################################################
-print(part1[0, :])
-print(part1[1:3, :])
 
-#first bit
+
+#in session analysis
+# 1. Correct each absorption spectrum using the recorded baseline spectrum (this only needs to be done
+# if the absorbance of the blank is measured separately from that of the sample) and
+
+# (a) plot the spectra for all mixture ratios at the same total Fe3+ + sal – concentration on the same
+# graph. Identify the isosbestic point (note that it only occurs for mixture ratios in which Fe3+ is
+# in excess).
+
+# (b) plot the spectra for the 1:1 mixtures at different dilutions on another graph
 
 
 ####################################################
