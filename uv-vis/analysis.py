@@ -16,19 +16,20 @@ part2_ii = np.genfromtxt('part2_ii.csv', delimiter=',')
 
 #fuck off data labels
 part2_i = part2_i[2:,:]
+print(part2_i[:3,:2])
 part2_ii = part2_ii[2:,:]
 
 #correct Fe3+/Cu2+ ratio UV-VIS plots w recorded baseline
 i = 1
 while i < part2_i.shape[1]:
     part2_i[:,i] -= part2_i[:,23]
-    i += 1
+    i += 2
 
 #Correct 5:5 Fe3+:Cu2+ dilution UV-VIS w blank (labeled sample zero due to linear dilution)
 i = 1
 while i < part2_ii.shape[1]:
     part2_ii[:,i] -= part2_ii[:,11]
-    i += 1
+    i += 2
 
 # (a) plot the spectra for all mixture ratios at the same total Fe3+ + sal – concentration on the same
 # graph. Identify the isosbestic point (note that it only occurs for mixture ratios in which Fe3+ is
@@ -39,10 +40,11 @@ plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 i = 0
 while i < (part2_i.shape[1] - 2):
-    plt.plot(part2_i[i], part2_i[i+1], color = "#fda0cc")
+    plt.plot(part2_i[:, i], part2_i[:, i+1])
+    # plt.plot(part2_i[:, i], part2_i[:, i+1], color = "#fda0cc")
     i += 2
-    
-plt.axhline(y=0, color='k', linestyle='-', linewidth=0.5)
+
+# plt.axhline(y=0, color='k', linestyle='-', linewidth=0.5)
 # plt.ylim([-1, max_rate + 3])
 # plt.xlim([0, fattest_v])
 plt.xlabel("Wavelength (nm)")
