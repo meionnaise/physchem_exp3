@@ -125,9 +125,24 @@ rubpy_noq = uv_vis[:,0:2]
 sample6_noq = uv_vis[:,2:4]
 sample10_noq = uv_vis[:,4:6]
 blank = uv_vis[:,6:]
+rubpy_noq[:,1] -= blank[:,1]
+sample6_noq[:,1] -= blank[:,1]
+sample10_noq[:,1] -= blank[:,1]
 
-# for sample in samples:
-#     sample[:,1] -= sample1[:,1]
+# #normalise
+# sample1 = normalise_col(sample1)
+# sample2 = normalise_col(sample2)
+# sample3 = normalise_col(sample3)
+# sample4 = normalise_col(sample4)
+# sample5 = normalise_col(sample5)
+# sample6 = normalise_col(sample6)
+# sample7 = normalise_col(sample7)
+# sample8 = normalise_col(sample8)
+# sample9 = normalise_col(sample9)
+# sample10 = normalise_col(sample10)
+# sample11 = normalise_col(sample11)
+# sample12 = normalise_col(sample12)
+# sample13 = normalise_col(sample13)
 
 sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12, sample13 = samples
 
@@ -137,6 +152,7 @@ sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9,
 rubpy_noq = normalise_col(rubpy_noq)
 rubpy_emission = normalise_col(rubpy_emission)
 rubpy_excitation = normalise_col(rubpy_excitation)
+
 
 noq_labels = ["Absorption", ]
 plt.rcParams["font.family"] = "Comic Sans MS"
@@ -207,6 +223,7 @@ plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", l
 plt.xlabel("[Fe3+]]")
 plt.legend()
 plt.ylabel("I0/I")
+# plt.xlim(0, q1_fexaxis[5])
 plt.title(f"Stern-Volmer plot for Fe3+ @ {fe_peak_wl} nm")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.savefig('part1_q1_Fe.png')
@@ -228,6 +245,7 @@ m, b, *_ = stats.linregress(q1_cuxaxis, q1_cuyaxis)
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
 plt.xlabel("[Cu2+]")
 plt.legend()
+# plt.xlim(0, q1_cuxaxis[5])
 plt.ylabel("I0/I")
 plt.title(f"Stern-Volmer plot for Cu2+ @ {cu_peak_wl} nm")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
