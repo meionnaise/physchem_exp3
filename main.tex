@@ -32,15 +32,17 @@
 \sethlcolor{Lavender}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \usepackage{amsmath,amssymb}
-
+\usepackage{pdfpages}
 \AtBeginEnvironment{quote}{\itshape}
 % PUT YOUR TITLE AND NAME HERE
-\newcommand{\titlestr}{Determination of Iron in Nutritional Supplements}
-\newcommand{\shorttitlestr}{EAC II Iron Lab Report}
+\newcommand{\titlestr}{TITLE}
+\newcommand{\shorttitlestr}{PHYSICAL CHEMISTRY III EXP 3 LAB REPORT}
 \newcommand{\authorstr}{Mei He} % INSERT YOUR NAME(S)
 \usepackage[backend=biber,style=chem-acs]{biblatex}
 \addbibresource{bib_file.bib}
 \begin{document}
+
+\includepdf[pages=-]{exp3_cover.pdf}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
@@ -56,13 +58,17 @@
   {\bf A1900510}
 
   \vspace{1cm}
-Friday May 26 2023, 1pm-5pm     % PUT YOUR DATE HERE
+Thursday March 7 2024     % PUT YOUR DATE HERE
 
   \vspace{1cm}
   Report submitted for
-  {\bf Environmental \& Analytical Chemistry II}
-  at the University of Adelaide. \textbf{Due 23:59pm May 26th 2023}
+  {\bf Physical Chemistry III}
+  at the University of Adelaide. \textbf{Due 23:59pm March 21st 2024}
 
+  \vspace{1cm}
+    \begin{abstract}
+        chuck abstract here
+    \end{abstract}
   \vspace{1cm}
   \tableofcontents
   \listoffigures
@@ -84,29 +90,25 @@ Friday May 26 2023, 1pm-5pm     % PUT YOUR DATE HERE
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
-% aims
-\section{Aims}
-\subfile{aim}
-
+% intro
+\section{Introduction}
+\subfile{intro.tex}
+A short introductory section incorporating the experimental aims. You may include figures and diagrams, but
+these should be prepared yourself or properly attributed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
-% procedure
-\section{Procedure}
-
-\subfile{procedure}
+% experiment
+\section{Experiment}
+An experimental section. The experimental section will have a more experiment specific component but adequate 
+details of what was done in the practical still need to be provided
+\subfile{experiment}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
 % Results
-\section{Results}
+\section{Results \& Discussion}
+\subfile{results_discussion}
 
-\subfile{results}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
-% discussion
-\section{Discussion}
-\subfile{discussion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
 % concl
 \section{Conclusion}
 \subfile{conclusion}
