@@ -15,8 +15,8 @@ def stern_volmer_y(x, noq):
 
     #find wl for max intensity
     wl_at_peak, peak = wl_4_peak(noq)
+    i0 = peak
     
-    #make array for i0/i for each sample so len(i0/i array) = len(x) ie num samples
     result = []
    
     for sample in x:
@@ -25,9 +25,9 @@ def stern_volmer_y(x, noq):
             if wavelength != wl_at_peak:
                 k += 1
                 continue
-            i0 = peak
             i = sample[k, 1]
             y = np.array([i0 / i])
+            print(i, i0, y)
             result = np.append(result, y, axis = 0)
             break
     return result, wl_at_peak
@@ -58,7 +58,8 @@ def kET(k22, x_red_potential, z):
     k11 = 10 ** 8 #(Rubpy kii)
 
     #get cell potential
-    cell_potential = x_red_potential + r_ox
+    cell_potential = x_red_potential + r_ox 
+    # cell_potential *= 1.602 * (10 ** (-19)) #convert units
     # use eqn 13 to get from cell potential - K12 (equilibrium constant for cross rxn)
     K12 = np.exp(cell_potential * ( (z * F) / (R * T)))
     #use K12 --> f12 (eqn 12)
@@ -78,6 +79,7 @@ prop = font_manager.FontProperties(fname=font_path)
 
 uv_vis = np.genfromtxt('uv_vis/part1.csv', delimiter=',')
 rubpy_emission = np.genfromtxt('fluorescence/emission_rubpy.csv', delimiter=',')
+rubpy_emission_norm = np.genfromtxt('fluorescence/emission_rubpy.csv', delimiter=',')
 rubpy_excitation = np.genfromtxt('fluorescence/excitation Rubpy.csv', delimiter=',')
 sample1 = np.genfromtxt('fluorescence/blank.csv', delimiter=',')
 sample2 = np.genfromtxt('fluorescence/sample2_emission_q.csv', delimiter=',')
@@ -95,6 +97,7 @@ sample13 = np.genfromtxt('fluorescence/sample13_emission_q.csv', delimiter=',')
 
 #fuck off data labels
 rubpy_emission = rubpy_emission[2:,:]
+rubpy_emission_norm = rubpy_emission_norm[2:,:]
 rubpy_excitation = rubpy_excitation[2:,:]
 uv_vis = uv_vis[2:,:]
 
@@ -150,7 +153,9 @@ sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9,
 
 #normalise
 rubpy_noq = normalise_col(rubpy_noq)
-rubpy_emission = normalise_col(rubpy_emission)
+print(rubpy_emission.shape)
+print(sample11.shape)
+rubpy_emission_norm = normalise_col(rubpy_emission_norm)
 rubpy_excitation = normalise_col(rubpy_excitation)
 
 
@@ -159,7 +164,7 @@ plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 plt.plot(rubpy_noq[:, 0], rubpy_noq[:,1], label = "Absorption")
-plt.plot(rubpy_emission[:, 0], rubpy_emission[:,1], label = "Emission")
+plt.plot(rubpy_emission_norm[:, 0], rubpy_emission_norm[:,1], label = "Emission")
 plt.plot(rubpy_excitation[:, 0], rubpy_excitation[:,1], label = "Excitation")
 plt.xlabel("Wavelength (nm)")
 plt.ylabel("Emission intensity")
@@ -171,8 +176,8 @@ plt.savefig('part1_noq.png')
 #plotting quenched ones
 
 #fe
-fe_labels = [0.2, 0.4, 0.8, 1.2, 1.6, 1.8]
-fe = np.array([sample2, sample3, sample4, sample5, sample6, sample7])
+fe_labels = [0, 0.2, 0.4, 0.8, 1.2, 1.6, 1.8]
+fe = np.array([ rubpy_emission, sample2, sample3, sample4, sample5, sample6, sample7])
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
@@ -187,8 +192,8 @@ plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.legend(title = "[Fe3+] (M)")
 plt.savefig('part1_fe.png')
 
-cu_labels = [0.02, 0.04, 0.08, 0.12, 0.16, 0.18]
-cu = np.array([sample8, sample9, sample10, sample11, sample12, sample13])
+cu_labels = [0, 0.02, 0.04, 0.08, 0.12, 0.16, 0.18]
+cu = np.array([rubpy_emission, sample8, sample9, sample10, sample11, sample12, sample13])
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
@@ -220,7 +225,7 @@ yerrb = np.std(q1_feyaxis)
 plt.errorbar(q1_fexaxis, q1_feyaxis, xerr = xerrb , yerr = yerrb, color = "#fda0cc")
 m, b, *_ = stats.linregress(q1_fexaxis, q1_feyaxis)
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
-plt.xlabel("[Fe3+]]")
+plt.xlabel("[Fe3+] (M)")
 plt.legend()
 plt.ylabel("I0/I")
 # plt.xlim(0, q1_fexaxis[5])
@@ -231,7 +236,6 @@ fe_slope = m
 print(f"\nQ1\n\nFe3+:\nSlope = {fe_slope}\nwavelength = {fe_peak_wl} nm\n")
 
 #cu
-q1_cuyaxis = stern_volmer_y(cu, rubpy_emission)
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
@@ -243,7 +247,7 @@ yerrb = np.std(q1_cuyaxis)
 plt.errorbar(q1_cuxaxis, q1_cuyaxis, xerr = xerrb , yerr = yerrb, color = "#fda0cc")
 m, b, *_ = stats.linregress(q1_cuxaxis, q1_cuyaxis)
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
-plt.xlabel("[Cu2+]")
+plt.xlabel("[Cu2+] (M)")
 plt.legend()
 # plt.xlim(0, q1_cuxaxis[5])
 plt.ylabel("I0/I")
