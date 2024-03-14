@@ -74,7 +74,7 @@ def kET(k22, x_red_potential, z):
 
 
 
-uv_vis = np.genfromtxt('part1.csv', delimiter=',')
+uv_vis = np.genfromtxt('uv_vis/part1.csv', delimiter=',')
 rubpy_emission = np.genfromtxt('fluorescence/emission_rubpy.csv', delimiter=',')
 rubpy_excitation = np.genfromtxt('fluorescence/excitation Rubpy.csv', delimiter=',')
 sample1 = np.genfromtxt('fluorescence/blank.csv', delimiter=',')
@@ -258,3 +258,35 @@ cu_kET = kET(cu_k22, cu_red_potential, cu_z)
 
 print(f"\nQ3\nRate coefficient for electron transfer:\nFe: {fe_kET} M^(-1)s^(-1)\nCu: {cu_kET} M^(-1)s^(-1)\n")
 
+f = open("part1_q1_fe_slope.txt", "w")
+f.write(str(fe_slope))
+f.close()
+
+f = open("part1_q1_fe_wl.txt", "w")
+f.write(str(fe_peak_wl))
+f.close()
+
+
+f = open("part1_q1_cu_slope.txt", "w")
+f.write(str(cu_slope))
+f.close()
+
+f = open("part1_q1_fe_wl.txt", "w")
+f.write(str(cu_peak_wl))
+f.close()
+
+f = open("part1_q2_fe.txt", "w")
+f.write(str(kq_fe))
+f.close()
+
+f = open("part1_q2_cu.txt", "w")
+f.write(str(kq_cu))
+f.close()
+
+f = open("part1_q3_fe.txt", "w")
+f.write(str(fe_kET))
+f.close()
+
+f = open("part1_q3_cu.txt", "w")
+f.write(str(cu_kET))
+f.close()

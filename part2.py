@@ -235,7 +235,8 @@ plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 plt.plot(x_data_ii, absorbance, marker = 'o', color = "#fda0cc" )
 m, b, *_ = stats.linregress(x_data_ii, absorbance)
-print(f"\nQ3\nExtinction coefficient: {m} M^(-1)cm^(-1)\n")
+q3_ext = m
+print(f"\nQ3\nExtinction coefficient: {q3_ext} M^(-1)cm^(-1)\n")
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.1f}x {b:+.1f}$', color = "w", linestyle = "--")
 plt.xlabel("[Fe3+], [sal-] (M)")
 # plt.xlim([0.78, 1.3])
@@ -335,29 +336,41 @@ Ko_b = 1 * stab_const_b #see eqn 20
 dGo_b = - R * T * np.log(Ko_b)
 print(f"\nb)\nMethod B:\nExtinction coefficient: {ext_coeff_b} M^(-1)cm^(-1)\nStability constant: {stab_const_b} M^(-1)\ndG^o = {dGo_b} Jmol^(-1)")
     
+######
+#write data to files
 
-####################################################
-#OLD
-####################################################
-# #plot results to visually affirm
-# velocities = np.array(bruh[1])
-# rates = np.array(bruh[0])
-# max_rate = (bruh[2])
-# max_rate_v = (bruh[3])
-# max_rate_angle = (bruh[4])
+f = open("part2_q1a.txt", "w")
+f.write(str(isosbestic_point))
+f.close()
 
-# plt.rcParams["font.family"] = "Comic Sans MS"
-# plt.rcParams['axes.facecolor'] = "#FFE1EF"
-# plt.figure(facecolor="#FFE1EF")
-# plt.plot(velocities, rates, color = "#fda0cc")
-# plt.plot(max_rate_v, max_rate, marker ='.',color = "w")
-# plt.axhline(y=0, color='k', linestyle='-', linewidth=0.5)
-# plt.ylim([-1, max_rate + 3])
-# plt.xlim([0, fattest_v])
-# plt.xlabel("Airspeed (ms^{-1})")
-# plt.ylabel("Rate of Climb (ms^{-1})")
-# label = " ({}, {}) @ {} degrees.".format( max_rate_v, max_rate, max_rate_angle)
-# plt.text(max_rate_v, max_rate, label , fontsize = "small")
-# plt.title("Maximum Rate of Climb")
-# plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
-# plt.show()
+f = open("part2_q2.txt", "w")
+f.write(str(empirical))
+f.close()
+
+f = open("part2_q3.txt", "w")
+f.write(str(q3_ext))
+f.close()
+
+f = open("part2_q4_a_ext.txt", "w")
+f.write(str(ext_coeff_a))
+f.close()
+
+f = open("part2_q4_a_stab.txt", "w")
+f.write(str(stab_const_a))
+f.close()
+
+f = open("part2_q4_a_gibbs.txt", "w")
+f.write(str(dGo_a))
+f.close()
+
+f = open("part2_q4_b_ext.txt", "w")
+f.write(str(ext_coeff_b))
+f.close()
+
+f = open("part2_q4_b_stab.txt", "w")
+f.write(str(stab_const_b))
+f.close()
+
+f = open("part2_q4_b_gibbs.txt", "w")
+f.write(str(dGo_b))
+f.close()
