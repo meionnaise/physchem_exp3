@@ -14,7 +14,8 @@ def normalise_col(x):
 def stern_volmer_y(x, noq):
 
     #find wl for max intensity
-    wl_at_peak = round(wl_4_peak(x), 1)
+    wl_at_peak = wl_4_peak(noq)
+    
     #make array for i0/i for each sample so len(i0/i array) = len(x) ie num samples
     result = []
    
@@ -37,18 +38,15 @@ def rate_coeff(slope):
     return kq
 
 
-def wl_4_peak(the_samples):
-    wavelengths = []
-    for sample in the_samples:
-        pk = np.amax(sample[:,1])
-        i = 0
-        for wl in sample[:,0]:
-            if sample[i,1] == pk:
-                wavelengths = np.append(wavelengths, wl)
-                break
-            i += 1
-    wl_at_peak = np.average(wavelengths)
-    return wl_at_peak
+def wl_4_peak(sample):
+    pk = np.amax(sample[:,1])
+    i = 0
+    for wl in sample[:,0]:
+        if sample[i,1] == pk:
+            wavelength = sample[i,0]
+            break
+        i += 1
+    return wavelength
 
 def kET(k22, x_red_potential, z):
     r_red_potential = -0.84
