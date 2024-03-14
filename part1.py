@@ -14,7 +14,7 @@ def normalise_col(x):
 def stern_volmer_y(x, noq):
 
     #find wl for max intensity
-    wl_at_peak = wl_4_peak(noq)
+    wl_at_peak, peak = wl_4_peak(noq)
     
     #make array for i0/i for each sample so len(i0/i array) = len(x) ie num samples
     result = []
@@ -25,7 +25,7 @@ def stern_volmer_y(x, noq):
             if wavelength != wl_at_peak:
                 k += 1
                 continue
-            i0 = noq[k,1]
+            i0 = peak
             i = sample[k, 1]
             y = np.array([i0 / i])
             result = np.append(result, y, axis = 0)
@@ -46,7 +46,7 @@ def wl_4_peak(sample):
             wavelength = sample[i,0]
             break
         i += 1
-    return wavelength
+    return wavelength, pk
 
 def kET(k22, x_red_potential, z):
     r_red_potential = -0.84
@@ -126,8 +126,8 @@ sample6_noq = uv_vis[:,2:4]
 sample10_noq = uv_vis[:,4:6]
 blank = uv_vis[:,6:]
 
-for sample in samples:
-    sample[:,1] -= sample1[:,1]
+# for sample in samples:
+#     sample[:,1] -= sample1[:,1]
 
 sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12, sample13 = samples
 
