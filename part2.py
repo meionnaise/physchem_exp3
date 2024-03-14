@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
+from matplotlib import font_manager
 
 #assume length is the same for each array
 def common_point(wavelengths, array1, array2):
@@ -29,6 +30,10 @@ def avg_value(array):
 
 part2_i = np.genfromtxt('uv_vis/part2_i.csv', delimiter=',')
 part2_ii = np.genfromtxt('uv_vis/part2_ii.csv', delimiter=',')
+
+font_path = 'Comic Sans MS.ttf'  # Your font path goes here
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
 
 ####################################################
 #PART 2

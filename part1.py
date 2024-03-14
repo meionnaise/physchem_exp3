@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
+from matplotlib import font_manager
 
 def normalise_col(x):
     i = 0
@@ -70,6 +71,9 @@ def kET(k22, x_red_potential, z):
     return kET
 
 
+font_path = 'Comic Sans MS.ttf'  # Your font path goes here
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
 
 
 
