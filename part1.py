@@ -290,7 +290,6 @@ f = open("part1_q1_fe_wl.txt", "w")
 f.write(str(fe_peak_wl))
 f.close()
 
-
 f = open("part1_q1_cu_slope.txt", "w")
 f.write(str(cu_slope))
 f.close()
