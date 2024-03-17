@@ -1,5 +1,5 @@
 \begin{mintedbox}{python}
-	import numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 from matplotlib import font_manager
