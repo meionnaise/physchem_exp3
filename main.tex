@@ -1,9 +1,10 @@
+% !TEX root = /workspaces/physchem_exp3/main.tex
 \documentclass[12pt,a4paper]{article}
 \setlength{\headheight}{14.49998pt}
 \addtolength{\topmargin}{-2.49998pt}
 \usepackage{float}
 \usepackage{graphicx}
-\usepackage{subfiles}
+\usepackage{inputs}
 \usepackage{amsfonts} 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -117,7 +118,7 @@ Thursday March 7 2024     % PUT YOUR DATE HERE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
 % intro
 \section{Introduction}
-\subfile{intro.tex}
+\input{intro.tex}
 A short introductory section incorporating the experimental aims. You may include figures and diagrams, but
 these should be prepared yourself or properly attributed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
@@ -125,18 +126,18 @@ these should be prepared yourself or properly attributed.
 \section{Experiment}
 An experimental section. The experimental section will have a more experiment specific component but adequate 
 details of what was done in the practical still need to be provided
-\subfile{experiment}
+\input{experiment}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
 % Results
 \section{Results \& Discussion}
-\subfile{results_discussion}
+\input{results_discussion}
 
 % concl
 \section{Conclusion}
-\subfile{conclusion}
+\input{conclusion}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
@@ -147,7 +148,7 @@ details of what was done in the practical still need to be provided
 
 \newpage
 \section{Appendix}
-\subfile{appx}
+\input{appx}
 \end{document}
 
 
