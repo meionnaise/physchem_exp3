@@ -10,4 +10,6 @@ def write_python_file(filename):
         f.write(new_data)
         f.close()
 
-write_python_file("part1.py")
+filenames = ["part1.py", "part2.py", "marcus_theory_fn.py"]
+for each_file in filenames:
+    write_python_file(each_file)

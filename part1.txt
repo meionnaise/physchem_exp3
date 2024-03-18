@@ -58,14 +58,10 @@ def kET(k22, x_red_potential, z):
     Z12 = 10 ** 11 #factor related to collision frequency
     k11 = 10 ** 8 #(Rubpy kii)
 
-    #get cell potential
-    cell_potential = x_red_potential + r_ox 
-    # use eqn 13 to get from cell potential - K12 (equilibrium constant for cross rxn)
-    K12 = np.exp(cell_potential * ( (z * F) / (R * T)))
-    #use K12 --> f12 (eqn 12)
-    f12 = np.exp(((np.log(K12)) ** 2) / (4 * np.log((k11 * k22) / (Z12 ** 2))))
-    # use f12 , k11, k22, k12 to get kET
-    kET = np.sqrt(k11 * k22 * K12 * f12)
+    cell_potential = x_red_potential + r_ox #get cell potential
+    K12 = np.exp(cell_potential * ( (z * F) / (R * T))) # use eqn 13 to get from cell potential - K12
+    f12 = np.exp(((np.log(K12)) ** 2) / (4 * np.log((k11 * k22) / (Z12 ** 2)))) #use K12 --> f12 (eqn 12)
+    kET = np.sqrt(k11 * k22 * K12 * f12) # use f12 , k11, k22, k12 to get kET
 
     return kET
 
