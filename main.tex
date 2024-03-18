@@ -21,6 +21,7 @@
 \usepackage{pdfpages}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
+\usepackage[title]{appendix}
 \usepackage[a4paper,margin=2cm]{geometry}
 \tcbuselibrary{minted,breakable,xparse,skins}
 
@@ -67,12 +68,12 @@
 \usepackage[backend=biber,style=chem-acs]{biblatex}
 \addbibresource{bib_file.bib}
 \usepackage[version=4]{mhchem}
-
-% \usepackage[modules = all]{chemmacros}
-% \chemsetup{
-%     modules = all,
-%     formula = mhchem
-% }
+\newcommand{\appendixpagenumbering}{
+  \break
+  \pagenumbering{arabic}
+  \renewcommand{\thepage}{\thesection-\arabic{page}}
+  \rfoot{Page \thepage\ of \pageref{LastPage}}
+}
 \begin{document}
 
 \includepdf[pages=-]{exp3_cover.pdf}
@@ -114,7 +115,7 @@ Thursday March 7 2024     % PUT YOUR DATE HERE
 \fancyhf{}
 \rhead{\shorttitlestr}
 \lhead{\authorstr}
-\rfoot{Page \thepage\ of \pageref{LastPage}}
+\rfoot{Page \thepage\ of \pageref{lastcontentpage}}
 \renewcommand{\headrulewidth}{1pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
@@ -145,7 +146,7 @@ details of what was done in the practical still need to be provided
 % concl
 \section{Conclusion}
 \input{conclusion}
-
+\label{lastcontentpage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
 % references
@@ -154,8 +155,10 @@ details of what was done in the practical still need to be provided
 \printbibliography
 
 \newpage
-\section{Appendix}
+\appendixpagenumbering
+\begin{appendices}
 \input{appx}
+\end{appendices}
 \end{document}
 
 
