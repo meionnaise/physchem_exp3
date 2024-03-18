@@ -103,10 +103,10 @@ plt.ylabel("Absorbance")
 label = "Isosbestic point\n({}, {})".format( round((isosbestic_point[0]), 3), round((isosbestic_point[1]), 3))
 plt.text(isosbestic_point[0], isosbestic_point[1], label , fontsize = "small")
 plt.plot(isosbestic_point[0], isosbestic_point[1], 'ro')
-plt.title("UV-Vis spectrum @ 300-800nm for varying Fe3+:Cu2+ ratio solutions")
+plt.title("UV-Vis spectrum @ 300-800nm for varying [Fe3+]:[sal-] ratio solutions")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.legend()
-plt.savefig('part2_i.png')
+plt.savefig('part2_q1a.png')
 
 
 #(b) plot the spectra for the 1:1 mixtures at different dilutions on another graph
@@ -123,7 +123,7 @@ plt.ylabel("Absorbance")
 plt.title("UV-Vis spectrum @ 300-800nm for 1:1 mixtures at different dilutions")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.legend(title = "[Fe3+] + [sal-]")
-plt.savefig('part2_ii.png')
+plt.savefig('part2_q1_b.png')
 
 
 ###### 2.2. job plot & get empirical formula
@@ -190,7 +190,7 @@ plt.ylabel("Absorbance")
 plt.title("Job Plot @ 530nm for different ratios of Fe3+ and sal-")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.legend(title = "[Fe3+] : [sal-]")
-plt.savefig('part2_i_job_plot.png')
+plt.savefig('part2_q2_job_plot.png')
 
 
 
@@ -250,7 +250,7 @@ plt.legend()
 plt.ylabel("Absorbance")
 plt.title("Absorbance @ 530nm for different concentrations of 1:1 [Fe3]+ :[ sal-]")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
-plt.savefig('part2_ii_q3.png')
+plt.savefig('part2_q3.png')
 
 
 #q4 find stability constant, gibbs free energy for formation, and extinction coefficient using methods A and B
@@ -287,7 +287,7 @@ plt.legend()
 plt.ylabel("Absorbance")
 plt.title("Method A")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
-plt.savefig('part2_ii_q4a.png')
+plt.savefig('part2_q4a.png')
 #get stuff
 R = 8.3145 #J mol^-1 K^-1
 T = 298.15 # K (assume 25 deg)
@@ -333,7 +333,7 @@ plt.legend()
 plt.ylabel("(Absorbance)^(1/2)")
 plt.title("Method B")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
-plt.savefig('part2_ii_q4b.png')
+plt.savefig('part2_q4b.png')
 #get stuff
 ext_coeff_b = 1 / m #extinction coefficient
 stab_const_b = (1 / (b ** 2)) / ext_coeff_b
