@@ -55,10 +55,31 @@ Substituting slopes to equation (\ref{eq:p1q2}):
 \end{equation*}
 \\
 \textbf{Question 3}
-From tables 2 and 3 in the lab manual,:
-\begin{equation*}
-    k_{11} = 1 \times 10 ^ 8 \text{ M}^{-1}\text{s}^{-1}
-\end{equation*}
+\par From tables 2 and 3 in the lab manual\autocite{lab_manual}:
+   $ k_{11} = 1 \times 10 ^ 8 \text{ M}^{-1}\text{s}^{-1}$, 
+    $k_{22, \text{Fe}^{3+}} = 4 \text{ M}^{-1}\text{s}^{-1}$, 
+    $k_{22, \text{Cu}^{2+}} = 1 \times 10 ^ {-5} \text{ M}^{-1}\text{s}^{-1}$. And standard reduction potentials: $E^{\circ}_{\text{R}^{3+}} = -0.8 \text{ V}$, $E^{\circ}_{\text{Fe}^{3+}} = 0.77 \text{ V}$, $E^{\circ}_{\text{Cu}^{2+}} = 0.16 \text{ V}$.
+\\ Since $E^{\circ}_{\text{Cell}} = E^{\circ}_{\text{Red}} + E^{\circ}_{\text{Ox}}$, 
+\begin{equation}
+    E^{\circ}_{\text{Cell}} = E^{\circ}_{\text{Red}} + 0.8 \text{ V}
+    \label{eq:ecell}
+\end{equation}
+Rearranging equations (13) and (12) respectively from the lab manual\autocite{lab_manual},
+\begin{equation}
+    K_{12} = e^{\frac{zF}{RT}E^{\circ}_{\text{Cell}}}
+    \label{eq:K12}
+\end{equation}
+\begin{equation}
+    f_{12} = e^{\frac{(\ln{K_{12}})^2}{4\ln{(k_{11}k_{22} / Z_{12}^2)}}}
+    \label{eq:f12}
+\end{equation}
+Equation (11) from the lab manual\autocite{lab_manual} gives:
+\begin{equation}
+    k_{\text{ET}} = k_{12} \approx \sqrt(k_{11}k_{22}K_{12}f_{12})
+    \label{eq:ket}
+\end{equation}
+Where $Z_{12} \approx 10^{11} \text{ M}^{-1} \text{s}^{-1}$, $T = 298.15\text{ K}$, and $F = 96485.3399 \text{ Cmol}^{-1}$.
+The below python function (see Appendix \ref{appx:part1_code} for full script) substitutes above given values, equations (\ref{eq:ecell}), (\ref{eq:K12}), and (\ref{eq:f12}) to equation (\ref{eq:ket}).
 
 
 \subsubsection*{Discussion Questions}
