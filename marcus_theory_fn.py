@@ -1,3 +1,4 @@
+import numpy as np
 def kET(k22, x_red_potential, z):
     r_red_potential = -0.84
     r_ox = -r_red_potential
@@ -9,7 +10,6 @@ def kET(k22, x_red_potential, z):
 
     #get cell potential
     cell_potential = x_red_potential + r_ox 
-    # cell_potential *= 1.602 * (10 ** (-19)) #convert units
     # use eqn 13 to get from cell potential - K12 (equilibrium constant for cross rxn)
     K12 = np.exp(cell_potential * ( (z * F) / (R * T)))
     #use K12 --> f12 (eqn 12)
