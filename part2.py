@@ -149,6 +149,9 @@ while i < part2_i.shape[1]:
     i += 2
 # get corresp [Fe 3+] concs
 i = 0
+x_data = []
+sal_conc = []
+data_labels = []
 while i < len(job_abs):
     label = part2_i_labels[i * 2]
     x = 1.3 * i / 10
@@ -156,14 +159,9 @@ while i < len(job_abs):
     x = np.array([x])
     sal = np.array([sal])
     label = np.array([label])
-    if i == 0:
-        x_data = x
-        sal_conc = sal
-        data_labels = label
-    else:
-        x_data = np.append(x_data, x, axis = 0)
-        sal_conc = np.append(sal_conc, sal, axis = 0)
-        data_labels = np.append(data_labels, label, axis = 0)
+    x_data = np.append(x_data, x, axis = 0)
+    sal_conc = np.append(sal_conc, sal, axis = 0)
+    data_labels = np.append(data_labels, label, axis = 0)
     i += 1
 
 #find empirical formula
@@ -173,11 +171,11 @@ while i < len(job_abs):
     if job_abs[i] == max_abs_a:
         empirical = data_labels[i]
         emp_x = x_data[i]
+        break
     i += 1
 
 print(f"\nQ2\nEmpirical formula in ratio {empirical}\n")
-#normalise
-# job_abs /= max_abs_a
+
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
@@ -192,10 +190,8 @@ plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.legend(title = "[Fe3+] : [sal-]")
 plt.savefig('part2_q2_job_plot.png')
 
+# 2.3. plot 1:1 abs @ 530nm and find extinction coeff using beer's law
 
-
-
-###### 2.3. plot 1:1 abs @ 530nm and find extinction coeff using beer's law
 #get index for abs @ 530nm
 i = 0
 absorbances_530nm = ()
@@ -207,17 +203,16 @@ while i < len(part2_ii[:,0]):
 
 #get absorbances @ 530nm
 i = 0
+absorbance = []
 while i < part2_ii.shape[1]:
     point_wanted = part2_ii[index, i+1]
     point_wanted = np.array([point_wanted])
-    if i == 0:
-        absorbance = point_wanted
-        i += 2
-        continue
     absorbance = np.append(absorbance, point_wanted, axis = 0)
     i += 2
 # get corresp [Fe 3+] concs
 i = 0
+x_data_ii = []
+data_labels = []
 while i < len(absorbance):
     label = part2_ii_labels[i * 2]
     if i == 5:
@@ -226,12 +221,8 @@ while i < len(absorbance):
         x = 1.3 * (2 * (i+1)) / 10
     x = np.array([x])
     label = np.array([label])
-    if i == 0:
-        x_data_ii = x
-        data_labels = label
-    else:
-        x_data_ii = np.append(x_data_ii, x, axis = 0)
-        data_labels = np.append(data_labels, label, axis = 0)
+    x_data_ii = np.append(x_data_ii, x, axis = 0)
+    data_labels = np.append(data_labels, label, axis = 0)
     i += 1
 
 #plot
@@ -256,15 +247,16 @@ plt.savefig('part2_q3.png')
 #q4 find stability constant, gibbs free energy for formation, and extinction coefficient using methods A and B
 #a (varying ratio) THIS IS FUCKED
 i = 0
-conc_data_4a = x_data[1:-1]
-x_data_4a = job_abs[1:-1]
-print(conc_data_4a)
+conc_data_4a = x_data[1:-1] #remove zero conc
+x_data_4a = job_abs[1:-1] #remove abs data for zero conc
 yaxis_4a = []
 xaxis_4a = x_data_4a
 for concentration in conc_data_4a:
     y4a = np.array([conc_data_4a[0] * (1.3 - conc_data_4a[0]) / x_data_4a[i]])
     yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
     i += 1
+#sort data
+xaxis_4a, yaxis_4a = zip(*sorted(zip(xaxis_4a, yaxis_4a)))
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
@@ -293,6 +285,8 @@ print(f"\nQ4\na)\nMethod A:\nExtinction coefficient: {ext_coeff_a} M^(-1)cm^(-1)
 
 #b
 i = 0
+yaxis_4b = []
+xaxis_4b = []
 while i < len(x_data_ii):
     x4b = np.sqrt(absorbance[i])
     if x4b == 0:
@@ -301,12 +295,8 @@ while i < len(x_data_ii):
     x4b = np.array([x4b])
     y4b = x_data_ii[i] / (np.sqrt(absorbance[i]))
     y4b = np.array([y4b])
-    if i == 0:
-        yaxis_4b = y4b
-        xaxis_4b = x4b
-    else:
-        yaxis_4b = np.append(yaxis_4b, y4b, axis = 0)
-        xaxis_4b = np.append(xaxis_4b, x4b, axis = 0)
+    yaxis_4b = np.append(yaxis_4b, y4b, axis = 0)
+    xaxis_4b = np.append(xaxis_4b, x4b, axis = 0)
 
     i += 1
 
