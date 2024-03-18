@@ -75,12 +75,20 @@ Rearranging equations (13) and (12) respectively from the lab manual\autocite{la
 \end{equation}
 Equation (11) from the lab manual\autocite{lab_manual} gives:
 \begin{equation}
-    k_{\text{ET}} = k_{12} \approx \sqrt(k_{11}k_{22}K_{12}f_{12})
+    k_{\text{ET}} = k_{12} \approx \sqrt{k_{11}k_{22}K_{12}f_{12}}
     \label{eq:ket}
 \end{equation}
 Where $Z_{12} \approx 10^{11} \text{ M}^{-1} \text{s}^{-1}$, $T = 298.15\text{ K}$, and $F = 96485.3399 \text{ Cmol}^{-1}$.
-The below python function (see Appendix \ref{appx:part1_code} for full script) substitutes above given values, equations (\ref{eq:ecell}), (\ref{eq:K12}), and (\ref{eq:f12}) to equation (\ref{eq:ket}).
-
+\\
+\par The below Python function (see Appendix \ref{appx:part1_code} for full script) takes inputs for ($k_{22}$, $E^{\circ}_{\text{Red}}$, $z$), and substitutes above given values, equations (\ref{eq:ecell}), (\ref{eq:K12}), and (\ref{eq:f12}) to equation (\ref{eq:ket}), to return the $k_{\text{ET}}$ value.
+\input{marcus_theory_fn.txt}
+This function was called for ($k_{22 \text{Fe}^{3+}}$, $E^{\circ}_{\text{Fe}^{3+}}$, $z = 3$), and ($k_{22, \text{Cu}^{2+}}$, $E^{\circ}_{\text{Cu}^{2+}}$, $z = 2$) to respectively return
+\begin{equation*}
+    \mathcolorbox{Lavender}{k_{\text{ET},\text{Fe}^{3+}} = \input{part1_q3_fe.txt} \text{ M}^{-1} \text{s}^{-1}}
+\end{equation*}
+\begin{equation*}
+    \mathcolorbox{Lavender}{k_{\text{ET},\text{Cu}^{2+}} = \input{part1_q3_cu.txt} \text{ M}^{-1} \text{s}^{-1}}
+\end{equation*}
 
 \subsubsection*{Discussion Questions}
 
