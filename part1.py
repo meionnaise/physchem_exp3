@@ -127,23 +127,6 @@ rubpy_noq[:,1] -= blank[:,1]
 sample6_noq[:,1] -= blank[:,1]
 sample10_noq[:,1] -= blank[:,1]
 
-# #normalise
-# sample1 = normalise_col(sample1)
-# sample2 = normalise_col(sample2)
-# sample3 = normalise_col(sample3)
-# sample4 = normalise_col(sample4)
-# sample5 = normalise_col(sample5)
-# sample6 = normalise_col(sample6)
-# sample7 = normalise_col(sample7)
-# sample8 = normalise_col(sample8)
-# sample9 = normalise_col(sample9)
-# sample10 = normalise_col(sample10)
-# sample11 = normalise_col(sample11)
-# sample12 = normalise_col(sample12)
-# sample13 = normalise_col(sample13)
-
-# sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12, sample13 = samples
-
 #no quencher
 
 #normalise
