@@ -142,7 +142,7 @@ sample10_noq[:,1] -= blank[:,1]
 # sample12 = normalise_col(sample12)
 # sample13 = normalise_col(sample13)
 
-sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12, sample13 = samples
+# sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12, sample13 = samples
 
 #no quencher
 
