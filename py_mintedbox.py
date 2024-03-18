@@ -10,4 +10,4 @@ def write_python_file(filename):
         f.write(new_data)
         f.close()
 
-write_python_file("part2.py")
+write_python_file("marcus_theory_fn.py")
