@@ -256,21 +256,14 @@ plt.savefig('part2_q3.png')
 #q4 find stability constant, gibbs free energy for formation, and extinction coefficient using methods A and B
 #a (varying ratio) THIS IS FUCKED
 i = 0
-while i < len(x_data):
-    y4a = x_data[i] * (1.3 - x_data[i]) / job_abs[i]
-    if y4a == 0:
-        i += 1
-        continue
-    x4a = job_abs[i]
-    x4a = np.array([x4a])
-    y4a = np.array([y4a])
-    if i == 1:
-        yaxis_4a = y4a
-        xaxis_4a = x4a
-    else:
-        yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
-        xaxis_4a = np.append(xaxis_4a, x4a, axis = 0)
-
+conc_data_4a = x_data[1:-1]
+x_data_4a = job_abs[1:-1]
+print(conc_data_4a)
+yaxis_4a = []
+xaxis_4a = x_data_4a
+for concentration in conc_data_4a:
+    y4a = np.array([conc_data_4a[0] * (1.3 - conc_data_4a[0]) / x_data_4a[i]])
+    yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
     i += 1
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
