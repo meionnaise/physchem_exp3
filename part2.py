@@ -31,7 +31,7 @@ def avg_value(array):
 part2_i = np.genfromtxt('uv_vis/part2_i.csv', delimiter=',')
 part2_ii = np.genfromtxt('uv_vis/part2_ii.csv', delimiter=',')
 
-font_path = 'Comic Sans MS.ttf'  # Your font path goes here
+font_path = 'Comic Sans MS.ttf'  
 font_manager.fontManager.addfont(font_path)
 prop = font_manager.FontProperties(fname=font_path)
 
@@ -154,8 +154,8 @@ sal_conc = []
 data_labels = []
 while i < len(job_abs):
     label = part2_i_labels[i * 2]
-    x = (1.3 * (10 ** (-3))) * i / 10
-    sal = (1.3 * (10 ** (-3))) - x
+    x = 1.3 * i / 10
+    sal = 1.3 - x
     x = np.array([x])
     sal = np.array([sal])
     label = np.array([label])
@@ -218,7 +218,7 @@ while i < len(absorbance):
     if i == 5:
         x = 0
     else:
-        x = (1.3 * (10 ** (-3))) * (2 * (i+1)) / 10
+        x = 1.3 * (2 * (i+1)) / 10
     x = np.array([x])
     label = np.array([label])
     x_data_ii = np.append(x_data_ii, x, axis = 0)
@@ -250,7 +250,7 @@ x_data_4a = job_abs[1:-1] #remove abs data for zero conc
 yaxis_4a = []
 xaxis_4a = x_data_4a
 for concentration in conc_data_4a:
-    y4a = np.array([conc_data_4a[0] * ((1.3 * (10 ** (-3))) - conc_data_4a[0]) / x_data_4a[i]])
+    y4a = np.array([conc_data_4a[0] * (1.3 - conc_data_4a[0]) / x_data_4a[i]])
     yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
     i += 1
 #sort data
@@ -278,7 +278,7 @@ R = 8.3145 #J mol^-1 K^-1
 T = 298.15 # K (assume 25 deg)
 ext_coeff_a =  1 / np.sqrt(- m)
 #use point (0, y-intercept) to get values along line of best fit
-stab_const_a = 1 / ((1.3 * (10 ** (-3))) - (ext_coeff_a * (yaxis_4a[0] + (xaxis_4a[0] / (ext_coeff_a ** 2)))))
+stab_const_a = 1 / (1.3 - (ext_coeff_a * (yaxis_4a[0] + (xaxis_4a[0] / (ext_coeff_a ** 2)))))
 Ko_a = 1 * stab_const_a #see eqn 20
 dGo_a = - R * T * np.log(Ko_a)
 print(f"\nQ4\na)\nMethod A:\nExtinction coefficient: {ext_coeff_a} M^(-1)cm^(-1)\nStability constant: {stab_const_a} M^(-1)\ndG^o = {dGo_a} Jmol^(-1)\n")
