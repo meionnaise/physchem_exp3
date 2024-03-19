@@ -181,7 +181,7 @@ print(f"\nQ2\nEmpirical formula in ratio {empirical}\n")
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
-plt.plot(x_data, job_abs, label = data_labels, color = "#fda0cc")
+plt.plot(x_data, job_abs, marker = 'o',label = data_labels, color = "#fda0cc")
 plt.text(emp_x, max_abs_a, empirical , fontsize = "small")
 plt.plot(emp_x, max_abs_a, 'o', color = "#fda0cc")
 plt.xlabel("[Fe3+] (M)")
