@@ -256,9 +256,7 @@ for concentration in conc_data_4a:
 #sort data
 xaxis_4a, yaxis_4a = zip(*sorted(zip(xaxis_4a, yaxis_4a)))
 i = 0
-for x in xaxis_4a:
-    print(x, yaxis_4a[i])
-    i += 1
+
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
