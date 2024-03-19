@@ -235,9 +235,7 @@ q3_ext = m
 print(f"\nQ3\nExtinction coefficient: {q3_ext} M^(-1)cm^(-1)\n")
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.1f}x {b:+.1f}$', color = "w", linestyle = "--")
 plt.xlabel("[Fe3+], [sal-] (M)")
-# plt.xlim([0.78, 1.3])
 plt.legend()
-# plt.ylim([0, np.amax(absorbance)])
 plt.ylabel("Absorbance")
 plt.title("Absorbance @ 530nm for different concentrations of 1:1 [Fe3]+ :[ sal-]")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
@@ -257,6 +255,10 @@ for concentration in conc_data_4a:
     i += 1
 #sort data
 xaxis_4a, yaxis_4a = zip(*sorted(zip(xaxis_4a, yaxis_4a)))
+i = 0
+for x in xaxis_4a:
+    print(x, yaxis_4a[i])
+    i += 1
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
@@ -276,7 +278,8 @@ plt.savefig('part2_q4a.png')
 #get stuff
 R = 8.3145 #J mol^-1 K^-1
 T = 298.15 # K (assume 25 deg)
-ext_coeff_a = np.sqrt(- 1 / m) #extinction coefficient is negative reciprocal of slope
+ext_coeff_a =  1 / np.sqrt(- m)
+#use point (0, y-intercept) to get values along line of best fit
 stab_const_a = 1 / (1.3 - (ext_coeff_a * (yaxis_4a[0] + (xaxis_4a[0] / (ext_coeff_a ** 2)))))
 Ko_a = 1 * stab_const_a #see eqn 20
 dGo_a = - R * T * np.log(Ko_a)

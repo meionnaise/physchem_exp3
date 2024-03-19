@@ -319,7 +319,7 @@ plt.title("Method B")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.savefig('part2_q4b.png')
 #get stuff
-ext_coeff_b = 1 / m #extinction coefficient
+ext_coeff_b = m #extinction coefficient
 stab_const_b = (1 / (b ** 2)) / ext_coeff_b
 Ko_b = 1 * stab_const_b #see eqn 20
 dGo_b = - R * T * np.log(Ko_b)
