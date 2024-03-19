@@ -187,7 +187,7 @@ plt.xlabel("[Fe3+] (M)")
 plt.ylabel("Absorbance")
 plt.title("Job Plot @ 530nm for different ratios of Fe3+ and sal-")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
-plt.legend(title = "[Fe3+] : [sal-]")
+plt.legend(title = "[Fe3+]")
 plt.savefig('part2_q2_job_plot.png')
 
 # 2.3. plot 1:1 abs @ 530nm and find extinction coeff using beer's law
