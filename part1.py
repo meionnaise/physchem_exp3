@@ -156,6 +156,7 @@ plt.savefig('part1_noq.png')
 #fe
 fe_labels = [0, 0.2, 0.4, 0.8, 1.2, 1.6, 1.8]
 fe = np.array([ rubpy_emission, sample2, sample3, sample4, sample5, sample6, sample7])
+
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
@@ -259,6 +260,9 @@ fe_kET = kET(fe_k22, fe_red_potential, fe_z)
 cu_kET = kET(cu_k22, cu_red_potential, cu_z)
 
 print(f"\nQ3\nRate coefficient for electron transfer:\nFe: {fe_kET} M^(-1)s^(-1)\nCu: {cu_kET} M^(-1)s^(-1)\n")
+
+#discussion q2
+
 
 f = open("part1_q1_fe_slope.txt", "w")
 f.write(str(fe_slope))
