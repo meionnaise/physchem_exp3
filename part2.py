@@ -250,7 +250,7 @@ x_data_4a = job_abs[1:-1] #remove abs data for zero conc
 yaxis_4a = []
 xaxis_4a = x_data_4a
 for concentration in conc_data_4a:
-    y4a = np.array([conc_data_4a[0] * (1.3 - conc_data_4a[0]) / x_data_4a[i]])
+    y4a = np.array([conc_data_4a[i] * (1.3 - conc_data_4a[i]) / x_data_4a[i]])
     yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
     i += 1
 #sort data
@@ -261,10 +261,10 @@ i = 0
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
-plt.plot(xaxis_4a, yaxis_4a, marker = 'o', color = "#fda0cc" )
+plt.scatter(xaxis_4a, yaxis_4a, marker = 'o', color = "#fda0cc" )
 xerra = np.std(xaxis_4a)
 yerra = np.std(yaxis_4a)
-plt.errorbar(xaxis_4a, yaxis_4a, xerr = xerra , yerr = yerra, color = "#fda0cc") 
+plt.errorbar(xaxis_4a, yaxis_4a, xerr = xerra , yerr = yerra, color = "#fda0cc") #this line fucked
 m, b, *_ = stats.linregress(xaxis_4a, yaxis_4a)
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
 plt.ylabel("[Fe3+]0 x [sal-]0 / A (M^2)")
