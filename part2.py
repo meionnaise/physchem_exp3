@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 from scipy import stats
 from matplotlib import font_manager
 
+def mM_2_M(conc):
+    results = conc / 1000
+    return results
+
 #assume length is the same for each array
 def common_point(wavelengths, array1, array2):
     i = 0
@@ -225,6 +229,8 @@ while i < len(absorbance):
     data_labels = np.append(data_labels, label, axis = 0)
     i += 1
 
+x_data_ii /= 2 #conc of complex is half of what was added
+
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
@@ -248,15 +254,13 @@ i = 0
 conc_data_4a = x_data[1:-1] #remove zero conc
 x_data_4a = job_abs[1:-1] #remove abs data for zero conc
 yaxis_4a = []
-xaxis_4a = x_data_4a
+xaxis_4a = x_data_4a 
 for concentration in conc_data_4a:
     y4a = np.array([conc_data_4a[i] * (1.3 - conc_data_4a[i]) / x_data_4a[i]])
     yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
     i += 1
 #sort data
 xaxis_4a, yaxis_4a = zip(*sorted(zip(xaxis_4a, yaxis_4a)))
-i = 0
-
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
@@ -278,10 +282,10 @@ R = 8.3145 #J mol^-1 K^-1
 T = 298.15 # K (assume 25 deg)
 ext_coeff_a =  1 / np.sqrt(- m)
 #use point (0, y-intercept) to get values along line of best fit
-stab_const_a = 1 / (1.3 - (ext_coeff_a * (yaxis_4a[0] + (xaxis_4a[0] / (ext_coeff_a ** 2)))))
-Ko_a = 1 * stab_const_a #see eqn 20
+k_a = ((b * ((-m) ** (1 / 2))) - (1.3)) ** (-1)
+Ko_a = 1000 * k_a #see eqn 20, since previous stuff is in mM, multiply by 1000 mM to get unitless
 dGo_a = - R * T * np.log(Ko_a)
-print(f"\nQ4\na)\nMethod A:\nExtinction coefficient: {ext_coeff_a} M^(-1)cm^(-1)\nStability constant: {stab_const_a} M^(-1)\ndG^o = {dGo_a} Jmol^(-1)\n")
+print(f"\nQ4\na)\nMethod A:\nExtinction coefficient: {ext_coeff_a} M^(-1)cm^(-1)\nStability constant: {Ko_a} M^(-1)\ndG^o = {dGo_a} Jmol^(-1)\n")
 
 
 #b
@@ -306,7 +310,7 @@ plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 plt.plot(xaxis_4b, yaxis_4b, marker = 'o', color = "#fda0cc" )
-xerrb = np.std(xaxis_4b) #multiply by two or nah bc theyre on either side already
+xerrb = np.std(xaxis_4b)
 yerrb = np.std(yaxis_4b)
 plt.errorbar(xaxis_4b, yaxis_4b, xerr = xerrb , yerr = yerrb, color = "#fda0cc")
 m, b, *_ = stats.linregress(xaxis_4b, yaxis_4b)
@@ -320,10 +324,10 @@ plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.savefig('part2_q4b.png')
 #get stuff
 ext_coeff_b = 1 / m #extinction coefficient
-stab_const_b = (1 / (b ** 2)) / ext_coeff_b
-Ko_b = 1 * stab_const_b #see eqn 20
+k_b = (1 / (b ** 2)) / ext_coeff_b
+Ko_b = 1000 * k_b #see eqn 20
 dGo_b = - R * T * np.log(Ko_b)
-print(f"\nb)\nMethod B:\nExtinction coefficient: {ext_coeff_b} M^(-1)cm^(-1)\nStability constant: {stab_const_b} M^(-1)\ndG^o = {dGo_b} Jmol^(-1)")
+print(f"\nb)\nMethod B:\nExtinction coefficient: {ext_coeff_b} M^(-1)cm^(-1)\nStability constant: {Ko_b} M^(-1)\ndG^o = {dGo_b} Jmol^(-1)")
     
 ######
 #write data to files
@@ -345,7 +349,7 @@ f.write(str(ext_coeff_a))
 f.close()
 
 f = open("part2_q4_a_stab.txt", "w")
-f.write(str(stab_const_a))
+f.write(str(Ko_a))
 f.close()
 
 f = open("part2_q4_a_gibbs.txt", "w")
@@ -357,7 +361,7 @@ f.write(str(ext_coeff_b))
 f.close()
 
 f = open("part2_q4_b_stab.txt", "w")
-f.write(str(stab_const_b))
+f.write(str(Ko_b))
 f.close()
 
 f = open("part2_q4_b_gibbs.txt", "w")
