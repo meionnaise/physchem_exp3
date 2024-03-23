@@ -151,7 +151,7 @@ while i < part2_i.shape[1]:
         continue
     job_abs = np.append(job_abs, point_wanted, axis = 0)
     i += 2
-np.linalg.norm(job_abs)
+
 # get corresp [Fe 3+] concs
 i = 0
 x_data = []
@@ -280,7 +280,6 @@ plt.xlabel("Absorbance")
 plt.title("Method A")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.savefig('part2_q4a.png')
-print(m, b)
 #get stuff
 R = 8.3145 #J mol^-1 K^-1
 T = 298.15 # K (assume 25 deg)
