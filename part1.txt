@@ -258,6 +258,44 @@ print(f"\nQ3\nRate coefficient for electron transfer:\nFe: {fe_kET} M^(-1)s^(-1)
 
 #discussion q2
 
+#fe
+plt.rcParams["font.family"] = "Comic Sans MS"
+plt.rcParams['axes.facecolor'] = "#FFE1EF"
+plt.figure(facecolor="#FFE1EF")
+#plot normalised emission
+i = 0
+for sample in fe:
+    sample = normalise_col(sample)
+    plt.plot(sample[:,0], sample[:,1], label = fe_labels[i])
+    i += 1
+plt.plot(rubpy_emission_norm[:, 0], rubpy_emission_norm[:,1], label = "Rubpy Emission", linestyle = "--", color = "#fda0cc")
+plt.xlabel("Wavelength (nm)")
+plt.ylabel("Emission intensity")
+plt.title("Emission intensity of Fe3+ solutions compared to Rubpy")
+plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
+plt.legend(title = "[Fe3+] (M)")
+plt.savefig('part1_discussionq2_fe.png')
+
+
+#cu
+plt.rcParams["font.family"] = "Comic Sans MS"
+plt.rcParams['axes.facecolor'] = "#FFE1EF"
+plt.figure(facecolor="#FFE1EF")
+#plot normalised emission
+i = 0
+for sample in cu:
+    sample = normalise_col(sample)
+    plt.plot(sample[:,0], sample[:,1], label = cu_labels[i])
+    i += 1
+plt.plot(rubpy_emission_norm[:, 0], rubpy_emission_norm[:,1], label = "Rubpy Emission", linestyle = "--", color = "#fda0cc")
+plt.xlabel("Wavelength (nm)")
+plt.ylabel("Emission intensity")
+plt.title("Emission intensity of Cu2+ solutions compared to Rubpy")
+plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
+plt.legend(title = "[Cu2+] (M)")
+plt.savefig('part1_discussionq2_cu.png')
+
+
 f = open("part1_q1_fe_slope.txt", "w")
 f.write(str(fe_slope))
 f.close()
