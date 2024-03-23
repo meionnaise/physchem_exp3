@@ -313,7 +313,7 @@ while i < len(x_data_ii):
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
-plt.plot(xaxis_4b, yaxis_4b, marker = 'o', color = "#fda0cc" )
+plt.scatter(xaxis_4b, yaxis_4b, marker = 'o', color = "#fda0cc" )
 xerrb = np.std(xaxis_4b)
 yerrb = np.std(yaxis_4b)
 plt.errorbar(xaxis_4b, yaxis_4b, xerr = xerrb , yerr = yerrb, color = "#fda0cc", ls = "none")
