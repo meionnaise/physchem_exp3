@@ -85,7 +85,7 @@ Where $Z_{12} \approx 10^{11} \text{ M}^{-1} \text{s}^{-1}$, $T = 298.15\text{ K
 \\
 \par The \textcolor{Lavender}{\mintinline{Python}{kET(k22, x_red_potential, z)}} Python function (see Appendix \ref{appx:part1_code} for full script) takes inputs for ($k_{22}$, $E^{\circ}_{\text{Red}}$, $z$), and substitutes above given values, equations (\ref{eq:ecell}), (\ref{eq:K12}), and (\ref{eq:f12}) to equation (\ref{eq:ket}), to return the $k_{\text{ET}}$ value.
 % \input{marcus_theory_fn.txt}
-This function was called for ($k_{22 \text{Fe}^{3+}}$, $E^{\circ}_{\text{Fe}^{3+}}$, $z = 3$), and ($k_{22, \text{Cu}^{2+}}$, $E^{\circ}_{\text{Cu}^{2+}}$, $z = 2$) to respectively return
+This function was called for ($k_{22 \text{Fe}^{3+}}$, $E^{\circ}_{\text{Fe}^{3+}}$, $z = 1$), and ($k_{22, \text{Cu}^{2+}}$, $E^{\circ}_{\text{Cu}^{2+}}$, $z = 1$) to respectively return
 \begin{equation*}
     \mathcolorbox{Lavender}{k_{\text{ET},\text{Fe}^{3+}} = \input{part1_q3_fe.txt} \text{ M}^{-1} \text{s}^{-1}}
 \end{equation*}
