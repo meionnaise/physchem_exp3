@@ -151,6 +151,7 @@ while i < part2_i.shape[1]:
         continue
     job_abs = np.append(job_abs, point_wanted, axis = 0)
     i += 2
+np.linalg.norm(job_abs)
 # get corresp [Fe 3+] concs
 i = 0
 x_data = []
@@ -158,8 +159,8 @@ sal_conc = []
 data_labels = []
 while i < len(job_abs):
     label = part2_i_labels[i * 2]
-    x = 1.3 * i / 10
-    sal = 1.3 - x
+    x = mM_2_M(1.3) * i / 10
+    sal = mM_2_M(1.3) - x
     x = np.array([x])
     sal = np.array([sal])
     label = np.array([label])
@@ -187,7 +188,7 @@ plt.figure(facecolor="#FFE1EF")
 plt.plot(x_data, job_abs, marker = 'o',label = data_labels, color = "#fda0cc")
 plt.text(emp_x, max_abs_a, empirical , fontsize = "small")
 plt.plot(emp_x, max_abs_a, 'o', color = "#fda0cc")
-plt.xlabel("[Fe3+] (M)")
+plt.xlabel("[Fe3+] (mM)")
 plt.ylabel("Absorbance")
 plt.title("Job Plot @ 530nm for different ratios of Fe3+ and sal-")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
@@ -213,6 +214,7 @@ while i < part2_ii.shape[1]:
     point_wanted = np.array([point_wanted])
     absorbance = np.append(absorbance, point_wanted, axis = 0)
     i += 2
+np.linalg.norm(absorbance)
 # get corresp [Fe 3+] concs
 i = 0
 x_data_ii = []
@@ -230,6 +232,7 @@ while i < len(absorbance):
     i += 1
 
 x_data_ii /= 2 #conc of complex is half of what was added
+x_data_ii /= 1000 #get in mM
 
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
@@ -237,10 +240,10 @@ plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 plt.plot(x_data_ii, absorbance, marker = 'o', color = "#fda0cc" )
 m, b, *_ = stats.linregress(x_data_ii, absorbance)
-q3_ext = m
+q3_ext = m 
 print(f"\nQ3\nExtinction coefficient: {q3_ext} M^(-1)cm^(-1)\n")
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.1f}x {b:+.1f}$', color = "w", linestyle = "--")
-plt.xlabel("[Fe3+], [sal-] (M)")
+plt.xlabel("[Fe3+(sal-)] (M)")
 plt.legend()
 plt.ylabel("Absorbance")
 plt.title("Absorbance @ 530nm for different concentrations of 1:1 [Fe3]+ :[ sal-]")
@@ -251,16 +254,16 @@ plt.savefig('part2_q3.png')
 #q4 find stability constant, gibbs free energy for formation, and extinction coefficient using methods A and B
 #a (varying ratio) THIS IS FUCKED
 i = 0
-conc_data_4a = x_data[1:-1] #remove zero conc
-x_data_4a = job_abs[1:-1] #remove abs data for zero conc
+fe_conc_data_4a = x_data[1:-1] #remove zero conc, and get original concs, not for complex
+sal_conc_data_4a = sal_conc [1:-1]
+xaxis_4a = job_abs[1:-1] #remove abs data for zero conc
 yaxis_4a = []
-xaxis_4a = x_data_4a 
-for concentration in conc_data_4a:
-    y4a = np.array([conc_data_4a[i] * (1.3 - conc_data_4a[i]) / x_data_4a[i]])
+for concentration in fe_conc_data_4a:
+    y4a = np.array([fe_conc_data_4a[i] * (sal_conc_data_4a[i]) / xaxis_4a[i]])
     yaxis_4a = np.append(yaxis_4a, y4a, axis = 0)
     i += 1
-#sort data
-xaxis_4a, yaxis_4a = zip(*sorted(zip(xaxis_4a, yaxis_4a)))
+
+
 #plot
 plt.rcParams["font.family"] = "Comic Sans MS"
 plt.rcParams['axes.facecolor'] = "#FFE1EF"
@@ -268,7 +271,7 @@ plt.figure(facecolor="#FFE1EF")
 plt.scatter(xaxis_4a, yaxis_4a, marker = 'o', color = "#fda0cc" )
 xerra = np.std(xaxis_4a)
 yerra = np.std(yaxis_4a)
-plt.errorbar(xaxis_4a, yaxis_4a, xerr = xerra , yerr = yerra, color = "#fda0cc") #this line fucked
+plt.errorbar(xaxis_4a, yaxis_4a, xerr = xerra , yerr = yerra, color = "#fda0cc", ls = "none") #this line fucked
 m, b, *_ = stats.linregress(xaxis_4a, yaxis_4a)
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
 plt.ylabel("[Fe3+]0 x [sal-]0 / A (M^2)")
@@ -277,13 +280,14 @@ plt.xlabel("Absorbance")
 plt.title("Method A")
 plt.grid(color = 'w', linestyle = '-', linewidth = 0.5)
 plt.savefig('part2_q4a.png')
+print(m, b)
 #get stuff
 R = 8.3145 #J mol^-1 K^-1
 T = 298.15 # K (assume 25 deg)
-ext_coeff_a =  1 / np.sqrt(- m)
+ext_coeff_a = 1 / np.sqrt(- m) 
 #use point (0, y-intercept) to get values along line of best fit
-k_a = ((b * ((-m) ** (1 / 2))) - (1.3)) ** (-1)
-Ko_a = 1000 * k_a #see eqn 20, since previous stuff is in mM, multiply by 1000 mM to get unitless
+k_a = -1 / ((b * (ext_coeff_a)) - (mM_2_M(1.3)))
+Ko_a = 1 * k_a #see eqn 20, since previous stuff is in mM, multiply by 1000 mM to get unitless
 dGo_a = - R * T * np.log(Ko_a)
 print(f"\nQ4\na)\nMethod A:\nExtinction coefficient: {ext_coeff_a} M^(-1)cm^(-1)\nStability constant: {Ko_a} M^(-1)\ndG^o = {dGo_a} Jmol^(-1)\n")
 
@@ -312,7 +316,7 @@ plt.figure(facecolor="#FFE1EF")
 plt.plot(xaxis_4b, yaxis_4b, marker = 'o', color = "#fda0cc" )
 xerrb = np.std(xaxis_4b)
 yerrb = np.std(yaxis_4b)
-plt.errorbar(xaxis_4b, yaxis_4b, xerr = xerrb , yerr = yerrb, color = "#fda0cc")
+plt.errorbar(xaxis_4b, yaxis_4b, xerr = xerrb , yerr = yerrb, color = "#fda0cc", ls = "none")
 m, b, *_ = stats.linregress(xaxis_4b, yaxis_4b)
 plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
 plt.plot(xaxis_4b, yaxis_4b, marker = 'o', color = "#fda0cc" )
@@ -325,7 +329,7 @@ plt.savefig('part2_q4b.png')
 #get stuff
 ext_coeff_b = 1 / m #extinction coefficient
 k_b = (1 / (b ** 2)) / ext_coeff_b
-Ko_b = 1000 * k_b #see eqn 20
+Ko_b = 1 * k_b #see eqn 20
 dGo_b = - R * T * np.log(Ko_b)
 print(f"\nb)\nMethod B:\nExtinction coefficient: {ext_coeff_b} M^(-1)cm^(-1)\nStability constant: {Ko_b} M^(-1)\ndG^o = {dGo_b} Jmol^(-1)")
     
