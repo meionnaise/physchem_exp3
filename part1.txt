@@ -194,12 +194,12 @@ plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 q1_feyaxis, fe_peak_wl = stern_volmer_y(fe, rubpy_emission)
 q1_fexaxis = fe_labels
-plt.plot(q1_fexaxis, q1_feyaxis, color = "#fda0cc", marker = 'o', )
+plt.scatter(q1_fexaxis, q1_feyaxis, color = "#fda0cc", marker = 'o', )
 xerrb = np.std(q1_fexaxis) #multiply by two or nah bc theyre on either side already
 yerrb = np.std(q1_feyaxis)
-plt.errorbar(q1_fexaxis, q1_feyaxis, xerr = xerrb , yerr = yerrb, color = "#fda0cc")
+plt.errorbar(q1_fexaxis, q1_feyaxis, xerr = xerrb , yerr = yerrb, color = "#fda0cc", ls = "none")
 m, b, *_ = stats.linregress(q1_fexaxis, q1_feyaxis)
-plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
+plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "#fda0cc", linestyle = "--")
 plt.xlabel("[Fe3+] (M)")
 plt.legend()
 plt.ylabel("I0/I")
@@ -216,12 +216,12 @@ plt.rcParams['axes.facecolor'] = "#FFE1EF"
 plt.figure(facecolor="#FFE1EF")
 q1_cuyaxis, cu_peak_wl = stern_volmer_y(cu, rubpy_emission)
 q1_cuxaxis = cu_labels
-plt.plot(q1_cuxaxis, q1_cuyaxis, color = "#fda0cc", marker = 'o', )
+plt.scatter(q1_cuxaxis, q1_cuyaxis, color = "#fda0cc", marker = 'o', )
 xerrb = np.std(q1_cuxaxis) #multiply by two or nah bc theyre on either side already
 yerrb = np.std(q1_cuyaxis)
-plt.errorbar(q1_cuxaxis, q1_cuyaxis, xerr = xerrb , yerr = yerrb, color = "#fda0cc")
+plt.errorbar(q1_cuxaxis, q1_cuyaxis, xerr = xerrb , yerr = yerrb, color = "#fda0cc", ls = "none")
 m, b, *_ = stats.linregress(q1_cuxaxis, q1_cuyaxis)
-plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "w", linestyle = "--")
+plt.axline(xy1=(0, b), slope=m, label=f'$y = {m:.8f}x {b:+.8f}$', color = "#fda0cc", linestyle = "--")
 plt.xlabel("[Cu2+] (M)")
 plt.legend()
 # plt.xlim(0, q1_cuxaxis[5])
